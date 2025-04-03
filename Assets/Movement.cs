@@ -5,24 +5,30 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float moveSpeed = 7f;
+    public float jumpForce = 6f;
+
     private Rigidbody2D rb;
     private Vector2 movement;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.freezeRotation = true; // Prevent unwanted rotation
+        rb.freezeRotation = true;
     }
 
     void Update()
     {
-        // Get horizontal input (A/D or Left/Right Arrow keys)
         movement.x = Input.GetAxisRaw("Horizontal");
+
+        // Basic jump check — jump only when vertical velocity is near zero
+        if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) < 0.01f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
     }
 
     void FixedUpdate()
     {
-        // Move player using Rigidbody2D (respects collisions)
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        rb.velocity = new Vector2(movement.x * moveSpeed, rb.velocity.y);
     }
 }
