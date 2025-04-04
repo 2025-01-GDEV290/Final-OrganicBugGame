@@ -19,7 +19,7 @@ public class Dialogue : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   //Dialogue pn interacting with zone
         if (Input.GetKeyDown("e"))
         {
             switch (zone){
@@ -52,13 +52,13 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    //DIALOGUE
+    //Dialogue on approaching Dialogue zone
     private void OnTriggerEnter2D(Collider2D other)
     {
         zone = other.tag;
         switch (other.tag){
             case "Milkman":
-                if( item == "milk") {
+                if( item == "milk") { //If the player has milk
                     dialogue.text = "Please, give me the milk, bug.";
                 } else {
                     dialogue.text = "I am the milkman. MORE TEXT. MORE TEXT. There is so much text in here to test the text boxes so there will be LOTS OF TEXT BIIIIIG TEXT yes so much text so much text yes yes yes yes yes yes yes I am the milk man";
