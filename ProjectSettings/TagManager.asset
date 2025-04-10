@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Milkman
   - Cow
+  - Bucket
   layers:
   - Default
   - TransparentFX
