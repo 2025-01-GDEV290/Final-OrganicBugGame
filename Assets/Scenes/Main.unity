@@ -1433,6 +1433,7 @@ GameObject:
   - component: {fileID: 1454309496}
   - component: {fileID: 1454309495}
   - component: {fileID: 1454309494}
+  - component: {fileID: 1454309498}
   m_Layer: 0
   m_Name: Pixel Perfect Camera
   m_TagString: Untagged
@@ -1696,6 +1697,15 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454309493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b95a6c7b01554d444803af8dc7da7c0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 358507904}
+  smoothSpeed: 0.1
+  offset: {x: 0, y: 0, z: -10}
   m_GameObject: {fileID: 1772103243}
   m_Enabled: 1
   m_EditorHideFlags: 0
