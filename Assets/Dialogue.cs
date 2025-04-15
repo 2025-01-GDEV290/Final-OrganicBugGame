@@ -7,10 +7,15 @@ public class Dialogue : MonoBehaviour
 {
 
     public TMP_Text dialogue;
+    public TMP_Text name;
     public GameObject dialogue_box;
 
     public string item = "none";
     public string zone = "none";
+
+    public bool milkman_complete = false;
+    public bool cow_complete = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +24,7 @@ public class Dialogue : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   //Dialogue pn interacting with zone
+    {   //Dialogue on interacting with zone
         if (Input.GetKeyDown("e"))
         {
             switch (zone){
@@ -29,19 +34,33 @@ public class Dialogue : MonoBehaviour
                     break;
                 
                 case "Cow":
+                if (!cow_complete) 
+                {
                     if ( item == "bucket" )
                     {
+                        cow_complete = true;
                         item = "milk";
-                        dialogue.text = "Moo! (You have milked the cow)";
                     } else {
                         dialogue.text = "(You can't milk the cow without a bucket)";
                     }
+                }
+                if(cow_complete) {
+                    dialogue.text = "Moo! (You have milked the cow)";
+                }
                     break;
 
                 case "Milkman":
-                    if (item == "milk") {
+                    if (!milkman_complete)
+                    {
+                        if (item == "milk"){
+                            milkman_complete = true;
+                        } else {
+                            dialogue.text = "I am the milkman. MORE TEXT. MORE TEXT. There is so much text in here to test the text boxes so there will be LOTS OF TEXT BIIIIIG TEXT yes so much text so much text yes yes yes yes yes yes yes I am the milk man";
+                        }
+                    }
+                    if (milkman_complete)
+                    {
                         dialogue.text = "Thank you. I now have milk. You may proceed.";
-                        item = "none";
                     }
                     break;
                 
@@ -55,32 +74,10 @@ public class Dialogue : MonoBehaviour
     //Dialogue on approaching Dialogue zone
     private void OnTriggerEnter2D(Collider2D other)
     {
+        dialogue.text = "Press E";
+        dialogue_box.SetActive(true);
         zone = other.tag;
-        switch (other.tag){
-            case "Milkman":
-                if( item == "milk") { //If the player has milk
-                    dialogue.text = "Please, give me the milk, bug.";
-                } else {
-                    dialogue.text = "I am the milkman. MORE TEXT. MORE TEXT. There is so much text in here to test the text boxes so there will be LOTS OF TEXT BIIIIIG TEXT yes so much text so much text yes yes yes yes yes yes yes I am the milk man";
-                }
-                dialogue_box.SetActive(true);
-                break;
-            
-            case "Cow":
-                dialogue.text = "Moo!";
-                dialogue_box.SetActive(true);
-                break;
-
-            case "Bucket":
-                dialogue.text = "(Press E to pick up the bucket)";
-                dialogue_box.SetActive(true);
-                break;
-                
-            default:
-                dialogue.text = "";
-                break;
-        }
-
+        name.text = zone;
     }
     private void OnTriggerExit2D(Collider2D other) {
         dialogue_box.SetActive(false);
