@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -7,115 +7,127 @@ public class Dialogue : MonoBehaviour
 {
     public TMP_Text dialogue;
     public GameObject dialogue_box;
-    public GameObject Player; // <-- manually assign this in Inspector
+    public GameObject player; // Drag the player into this in Inspector
 
-    private bool playerInRange = false;
+    private string currentItem = "none";
+    private string currentZone = "none";
+    private bool canInteract = false;
     private bool dialogueActive = false;
-    private string currentDialogue = "";
 
-    private Movement playerMovement;
+    private Movement movementScript; // <-- Replace with actual name of your movement script
 
-    private void Start()
+    void Start()
     {
-        if (Player != null)
+        if (player != null)
         {
-            playerMovement = Player.GetComponent<Movement>();
-            Debug.Log("Player movement component found.");
-        }
-        else
-        {
-            Debug.LogWarning("Player reference not assigned in the inspector!");
+            movementScript = player.GetComponent<Movement>();
         }
     }
 
-    private void Update()
+    void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (canInteract && !dialogueActive && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("E key pressed.");
-        }
-
-        if (playerInRange)
-        {
-            Debug.Log("Player is in range.");
-        }
-
-        if (playerInRange && !dialogueActive && Input.GetKeyDown(KeyCode.E))
-        {
-            Debug.Log("Starting dialogue...");
-
-            dialogue.text = currentDialogue;
-            dialogue_box.SetActive(true);
+            HandleInteraction(currentZone);
             dialogueActive = true;
 
-            if (playerMovement != null)
+            if (movementScript != null)
             {
-                playerMovement.enabled = false;
-                Debug.Log("Player movement disabled.");
+                movementScript.enabled = false;
+                Debug.Log("Movement script DISABLED.");
             }
         }
         else if (dialogueActive && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("Ending dialogue...");
-
             dialogue_box.SetActive(false);
             dialogueActive = false;
 
-            if (playerMovement != null)
+            if (movementScript != null)
             {
-                playerMovement.enabled = true;
-                Debug.Log("Player movement re-enabled.");
+                movementScript.enabled = true;
+                Debug.Log("Movement script ENABLED.");
             }
         }
     }
 
+    void HandleInteraction(string zone)
+    {
+        switch (zone)
+        {
+            case "Bucket":
+                currentItem = "bucket";
+                dialogue.text = "(You have picked up the bucket)";
+                break;
+
+            case "Cow":
+                if (currentItem == "bucket")
+                {
+                    currentItem = "milk";
+                    dialogue.text = "Moo! (You have milked the cow)";
+                }
+                else
+                {
+                    dialogue.text = "(You can't milk the cow without a bucket)";
+                }
+                break;
+
+            case "Milkman":
+                if (currentItem == "milk")
+                {
+                    dialogue.text = "Thank you. I now have milk. You may proceed.";
+                    currentItem = "none";
+                }
+                else
+                {
+                    dialogue.text = "I am the milkman. MORE TEXT. I need milk.";
+                }
+                break;
+
+            default:
+                dialogue.text = "";
+                break;
+        }
+
+        dialogue_box.SetActive(true);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("OnTriggerEnter2D with: " + other.gameObject.name);
+        currentZone = other.tag;
+        canInteract = true;
 
-        if (other.gameObject == Player)
+        if (other.tag == "Bucket")
         {
-            Debug.Log("Player entered dialogue trigger.");
-            playerInRange = true;
-
-            switch (gameObject.tag)
-            {
-                case "Milkman":
-                    currentDialogue = "I am the milkman...";
-                    break;
-
-                case "Cow":
-                    currentDialogue = "Moo! (You can't milk the cow without a bucket)";
-                    break;
-
-                default:
-                    currentDialogue = "";
-                    break;
-            }
+            dialogue.text = "(Press E to pick up the bucket)";
+            dialogue_box.SetActive(true);
+        }
+        else if (other.tag == "Cow")
+        {
+            dialogue.text = "Moo!";
+            dialogue_box.SetActive(true);
+        }
+        else if (other.tag == "Milkman")
+        {
+            dialogue.text = "(Press E to talk)";
+            dialogue_box.SetActive(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("OnTriggerExit2D with: " + other.gameObject.name);
-
-        if (other.gameObject == Player)
+        if (other.tag == currentZone)
         {
-            Debug.Log("Player exited dialogue trigger.");
-            playerInRange = false;
+            canInteract = false;
+            currentZone = "none";
+            dialogue_box.SetActive(false);
 
-            if (dialogueActive)
+            if (movementScript != null)
             {
-                Debug.Log("Closing dialogue box due to player exit.");
-                dialogue_box.SetActive(false);
-                dialogueActive = false;
-
-                if (playerMovement != null)
-                {
-                    playerMovement.enabled = true;
-                    Debug.Log("Player movement re-enabled.");
-                }
+                movementScript.enabled = true;
+                Debug.Log("Movement script ENABLED on exit.");
             }
+
+            dialogueActive = false;
         }
     }
 }
