@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: Cow mover
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"Kind":"Flow","collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":11.17924,"y":-82.79169},"zoom":1.0,"elements":[{"coroutine":false,"defaultValues":{},"position":{"x":-253.0,"y":-269.0},"guid":"056b7aa4-69a9-4f44-a277-ad4640036b19","$version":"A","$type":"Unity.VisualScripting.Start","$id":"9"},{"coroutine":false,"defaultValues":{},"position":{"x":-204.0,"y":60.0},"guid":"d5e5147b-4c0c-48b5-9e88-cfa382bbe296","$version":"A","$type":"Unity.VisualScripting.Update"},{"type":"UnityEngine.BoxCollider2D","value":null,"defaultValues":{},"position":{"x":34.0,"y":12.0},"guid":"4560899b-5173-41cf-ae2f-720c84953e10","$version":"A","$type":"Unity.VisualScripting.Literal"},{"specifyFallback":false,"kind":"Scene","defaultValues":{"name":{"$content":"right","$type":"System.String"}},"position":{"x":-361.0,"y":-115.0},"guid":"2a6b9c0b-07c2-4a15-ba8c-9515ffb84ac5","$version":"A","$type":"Unity.VisualScripting.GetVariable","$id":"15"},{"member":{"name":"position","parameterTypes":null,"targetType":"UnityEngine.Transform","targetTypeName":"UnityEngine.Transform","$version":"A"},"defaultValues":{"target":null},"position":{"x":-203.0,"y":-49.0},"guid":"36249b12-7cd1-4985-b81b-cccca9ca083b","$version":"A","$type":"Unity.VisualScripting.GetMember","$id":"17"},{"chainable":false,"member":{"name":"velocity","parameterTypes":null,"targetType":"UnityEngine.Rigidbody2D","targetTypeName":"UnityEngine.Rigidbody2D","$version":"A"},"defaultValues":{"target":null,"input":{"x":0.25,"y":0.0,"$type":"UnityEngine.Vector2"}},"position":{"x":-47.0,"y":-277.0},"guid":"d2ea4ad9-1ba9-44ee-a40d-d72c3f5254ba","$version":"A","$type":"Unity.VisualScripting.SetMember","$id":"20"},{"chainable":false,"parameterNames":["animator","stateInfo","layerIndex"],"member":{"name":"OnStateEnter","parameterTypes":["UnityEngine.Animator","UnityEngine.AnimatorStateInfo","System.Int32"],"targetType":"UnityEngine.StateMachineBehaviour","targetTypeName":"UnityEngine.StateMachineBehaviour","$version":"A"},"defaultValues":{"target":null,"%animator":null,"%layerIndex":{"$content":0,"$type":"System.Int32"}},"position":{"x":156.0,"y":-271.0},"guid":"f9d7bc76-4b7f-4ea7-acb2-9065571fd9f9","$version":"A","$type":"Unity.VisualScripting.InvokeMember","$id":"23"},{"sourceUnit":{"$ref":"9"},"sourceKey":"trigger","destinationUnit":{"$ref":"20"},"destinationKey":"assign","guid":"feea49d8-c60d-4375-b76c-a40e4c226c15","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"20"},"sourceKey":"assigned","destinationUnit":{"$ref":"23"},"destinationKey":"enter","guid":"99e1e818-a40c-44b8-a195-6394f090b269","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"15"},"sourceKey":"value","destinationUnit":{"$ref":"17"},"destinationKey":"target","guid":"5b9b645f-b2d3-411f-be7d-99305d72fb94","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []
