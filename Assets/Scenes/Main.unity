@@ -1065,6 +1065,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue: {fileID: 255018461}
   dialogue_box: {fileID: 1772103243}
+  item: none
+  zone: none
 --- !u!1 &1178859863
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,7 +1435,7 @@ GameObject:
   - component: {fileID: 1454309496}
   - component: {fileID: 1454309495}
   - component: {fileID: 1454309494}
-  - component: {fileID: 1454309498}
+  - component: {fileID: 1772103245}
   m_Layer: 0
   m_Name: Pixel Perfect Camera
   m_TagString: Untagged
@@ -1662,7 +1664,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1772103244}
   - component: {fileID: 1772103246}
-  - component: {fileID: 1772103245}
   - component: {fileID: 1772103248}
   m_Layer: 5
   m_Name: DialogueBox
@@ -1703,33 +1704,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95a6c7b01554d444803af8dc7da7c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 358507904}
+  target: {fileID: 0}
   smoothSpeed: 0.1
   offset: {x: 0, y: 0, z: -10}
-  m_GameObject: {fileID: 1772103243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6901961}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1772103246
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1763,6 +1740,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1805709686}
   - component: {fileID: 1805709685}
+  - component: {fileID: 1805709688}
+  - component: {fileID: 1805709687}
   m_Layer: 0
   m_Name: milkman_right_facing
   m_TagString: Untagged
@@ -1837,6 +1816,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1805709687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805709684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"nest":{"source":"Macro","macro":null,"embed":null}}'
+    _objectReferences: []
+--- !u!114 &1805709688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805709684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
 --- !u!1 &1894380911
 GameObject:
   m_ObjectHideFlags: 0
