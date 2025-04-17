@@ -12,9 +12,11 @@ public class Dialogue : MonoBehaviour
     public string item = "none";
     public string zone = "none";
     // Start is called before the first frame update
+
+    private InventoryUI inventory;
     void Start()
     {
-        
+        inventory = FindObjectOfType<InventoryUI>();
     }
 
     // Update is called once per frame
@@ -26,6 +28,7 @@ public class Dialogue : MonoBehaviour
                 case "Bucket":
                     item = "bucket";
                     dialogue.text = "(You have picked up the bucket)";
+                    inventory.ShowEmptyBucket();
                     break;
                 
                 case "Cow":
@@ -33,15 +36,18 @@ public class Dialogue : MonoBehaviour
                     {
                         item = "milk";
                         dialogue.text = "Moo! (You have milked the cow)";
+                        inventory.ShowMilkBucket();
                     } else {
                         dialogue.text = "(You can't milk the cow without a bucket)";
                     }
                     break;
 
                 case "Milkman":
-                    if (item == "milk") {
+                    if (item == "milk") 
+                    {
                         dialogue.text = "Thank you. I now have milk. You may proceed.";
                         item = "none";
+                        inventory.ClearInventory();
                     }
                     break;
                 
@@ -56,11 +62,16 @@ public class Dialogue : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         zone = other.tag;
-        switch (other.tag){
+        switch (other.tag)
+        {
             case "Milkman":
-                if( item == "milk") { //If the player has milk
+                if( item == "milk") //If the player has milk
+                { 
                     dialogue.text = "Please, give me the milk, bug.";
-                } else {
+                } 
+                
+                else 
+                {
                     dialogue.text = "I am the milkman. MORE TEXT. MORE TEXT. There is so much text in here to test the text boxes so there will be LOTS OF TEXT BIIIIIG TEXT yes so much text so much text yes yes yes yes yes yes yes I am the milk man";
                 }
                 dialogue_box.SetActive(true);
