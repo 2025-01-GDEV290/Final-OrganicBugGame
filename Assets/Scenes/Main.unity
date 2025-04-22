@@ -1152,13 +1152,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c067f9e9aa22aee48916771b0a7bce90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DialogueText: {fileID: 255018461}
+  Sentences:
+  - Hello
+  - Hello 2
+  - words words woroaosnabd;jgnb;asdfnbg;jkasd;olikg
+  DialogueSpeed: 0.05
   dialogue: {fileID: 255018461}
   name: {fileID: 407876715}
   dialogue_box: {fileID: 1772103243}
   item: none
   zone: none
+  dialogue_lines: []
+  dialogue_num: 0
   milkman_complete: 0
   cow_complete: 0
+  paused: 0
 --- !u!58 &1137651800
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1798,7 +1807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1772103244
 RectTransform:
   m_ObjectHideFlags: 0
