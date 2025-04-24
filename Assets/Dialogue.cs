@@ -25,9 +25,11 @@ public class Dialogue : MonoBehaviour
 
 
     // Start is called before the first frame update
+
+    private InventoryUI inventory;
     void Start()
     {
-        
+        inventory = FindObjectOfType<InventoryUI>();
     }
 
     // Update is called once per frame
@@ -39,6 +41,7 @@ public class Dialogue : MonoBehaviour
                 case "Bucket":
                     item = "bucket";
                     dialogue_lines = new string[1] {"(You have picked up the bucket)"};
+                    inventory.ShowEmptyBucket();
                     break;
                 
                 case "Cow":
@@ -57,11 +60,16 @@ public class Dialogue : MonoBehaviour
                     if (cow_complete)
                     {
                         dialogue_lines = new string[1] { "Moo! (You have milked the cow)" };
+                        item = "milk";
+                        inventory.ShowMilkBucket();
+                    } else {
+                        dialogue_lines = new String[1] { "(You can't milk the cow without a bucket)"};
                     }
                     
                     break;
 
                 case "Milkman":
+
                     if (!milkman_complete)
                     {
                         if (item == "milk")
@@ -76,6 +84,8 @@ public class Dialogue : MonoBehaviour
                     if (milkman_complete)
                     {
                         dialogue_lines = new string[3] {"Thank you", "I now have milk.", "You may proceed." };
+                        item = "none";
+                        inventory.ClearInventory()
                     }                 
                 break;
                 
@@ -112,6 +122,7 @@ public class Dialogue : MonoBehaviour
         dialogue_box.SetActive(true);
         zone = other.tag;
         name.text = zone;
+       
     }
     private void OnTriggerExit2D(Collider2D other) {
         dialogue_box.SetActive(false);

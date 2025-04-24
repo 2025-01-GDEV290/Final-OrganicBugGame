@@ -7,6 +7,7 @@ TagManager:
   - Milkman
   - Cow
   - Bucket
+  - Milkman Walker
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Bug
   - 
   - 
   - 
