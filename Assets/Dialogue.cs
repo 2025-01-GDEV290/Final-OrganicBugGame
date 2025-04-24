@@ -63,7 +63,7 @@ public class Dialogue : MonoBehaviour
                         item = "milk";
                         inventory.ShowMilkBucket();
                     } else {
-                        dialogue_lines = new String[1] { "(You can't milk the cow without a bucket)"};
+                        dialogue_lines = new string[1] { "(You can't milk the cow without a bucket)"};
                     }
                     
                     break;
@@ -85,7 +85,7 @@ public class Dialogue : MonoBehaviour
                     {
                         dialogue_lines = new string[3] {"Thank you", "I now have milk.", "You may proceed." };
                         item = "none";
-                        inventory.ClearInventory()
+                        inventory.ClearInventory();
                     }                 
                 break;
                 
