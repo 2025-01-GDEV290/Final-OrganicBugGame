@@ -10,7 +10,7 @@ public class Dialogue : MonoBehaviour
     private int Index = 0;
     public float DialogueSpeed;
     public TMP_Text dialogue;
-    public TMP_Text name;
+    public TMP_Text NPCname;
     public GameObject dialogue_box;
 
     public string item = "none";
@@ -118,10 +118,10 @@ public class Dialogue : MonoBehaviour
     //Dialogue on approaching Dialogue zone
     private void OnTriggerEnter2D(Collider2D other)
     {
-        dialogue.text = "Press E";
+        DialogueText.text = "Press E";
         dialogue_box.SetActive(true);
         zone = other.tag;
-        name.text = zone;
+        NPCname.text = zone;
        
     }
     private void OnTriggerExit2D(Collider2D other) {

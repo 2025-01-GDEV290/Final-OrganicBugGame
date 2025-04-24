@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
 {
     public float moveSpeed = 7f;
     public float jumpForce = 6f;
+    private Vector3 flip;
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -25,6 +26,25 @@ public class Movement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
+
+        if(rb.position.y < -10)
+        {
+            rb.position = new Vector2(-6, 11);
+        }
+
+        if (rb.velocity.x > 0)
+        {
+            flip = transform.localScale;
+            flip.x = -1;
+            transform.localScale = flip;
+        }
+        if (rb.velocity.x < 0)
+        {
+            flip = transform.localScale;
+            flip.x = 1;
+            transform.localScale = flip;
+        }
+
     }
 
     void FixedUpdate()
