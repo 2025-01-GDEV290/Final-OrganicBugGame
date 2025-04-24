@@ -1041,7 +1041,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Moving cow
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2086227589315005170, guid: dbae57b9850630a4e8e45623da7842cb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
