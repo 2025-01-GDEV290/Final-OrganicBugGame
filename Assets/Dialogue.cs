@@ -78,12 +78,12 @@ public class Dialogue : MonoBehaviour
                         }
                         else
                         {
-                            dialogue_lines = new string[2] {"I am the milk man", "bring me milk, bug"};
+                            dialogue_lines = new string[2] {"Oh! It's you! This is great. I need someone to milk the cow, but no one can find the bucket", "If you find it, could you please take care of it? Thanks."};
                         }
                     }
                     if (milkman_complete)
                     {
-                        dialogue_lines = new string[3] {"Thank you", "I now have milk.", "You may proceed." };
+                        dialogue_lines = new string[3] { "Thank you", "I have one more favor to ask you", "Auntie wants to take a photo with her family, but can't find them anywhere. Can you lend her a hand?" };
                         item = "none";
                         inventory.ClearInventory();
                     }                 
