@@ -12,11 +12,17 @@ public class Dialogue : MonoBehaviour
     public TMP_Text dialogue;
     public TMP_Text NPCname;
     public GameObject dialogue_box;
+    public GameObject wall;
+    public GameObject spawn;
+    public GameObject family1;
+    public GameObject family2;
+    public GameObject family3;
 
     public string item = "none";
     public string zone = "none";
     public string[] dialogue_lines;
     public int dialogue_num = 0;
+    public int family_gathered = 0;
 
     public bool milkman_complete = false;
     public bool cow_complete = false;
@@ -86,8 +92,30 @@ public class Dialogue : MonoBehaviour
                         dialogue_lines = new string[3] {"Thank you", "I now have milk.", "You may proceed." };
                         item = "none";
                         inventory.ClearInventory();
+                        wall.SetActive(false);
                     }                 
                 break;
+
+                case "Auntie":
+                    spawn.transform.position = new Vector2(29,13);
+                    if (family_gathered == 3) {
+                        dialogue_lines = new string[2] {"Family gathered", "Thank you"};
+                    } else {
+                        dialogue_lines = new string[1] { "Hello please go find my family thank you"};
+                    }
+                    break;
+
+                case "Family 1":
+                    dialogue_lines = new string[1] { "Hello hi yes I will go to auntie"};
+                    break;
+                
+                case "Family 2":
+                    dialogue_lines = new string[1] { "Hello hi yes I will also go to auntie"};
+                    break;
+                
+                case "Family 3":
+                    dialogue_lines = new string[1] { "Hello hi yes I will go to auntie as well"};
+                    break;
                 
                 default:
                     Debug.Log("Nothing to interact with");
@@ -152,9 +180,38 @@ public class Dialogue : MonoBehaviour
             StartCoroutine(WriteSentence());
 
         } else {
+                if (zone != "Family 1" && zone != "Family 2" && zone != "Family 3")
+                {
+                    Index = 0;
+                    DialogueText.text = "";
+                    StartCoroutine(WriteSentence());
+                }
+                
+                
+            }
+            
+         
+        if (Index >= dialogue_lines.Length) {
             Index = 0;
-            DialogueText.text = "";
-            StartCoroutine(WriteSentence());
+            switch (zone) {
+                case "Family 1":
+                    family1.SetActive(false);
+                    family_gathered++;
+                    break;
+
+                case "Family 2":
+                    family2.SetActive(false);
+                    family_gathered++;
+                    break;
+                
+                case "Family 3":
+                    family3.SetActive(false);
+                    family_gathered++;
+                    break;
+                
+                default:
+                    break;
+            }
         }
     }
 
