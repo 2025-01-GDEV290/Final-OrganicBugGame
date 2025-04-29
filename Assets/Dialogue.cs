@@ -17,6 +17,7 @@ public class Dialogue : MonoBehaviour
     public GameObject family1;
     public GameObject family2;
     public GameObject family3;
+    public AudioSource quest_complete;
 
     public string item = "none";
     public string zone = "none";
@@ -81,6 +82,7 @@ public class Dialogue : MonoBehaviour
                         if (item == "milk")
                         {
                             milkman_complete = true;
+                            quest_complete.Play();
                         }
                         else
                         {
@@ -99,6 +101,7 @@ public class Dialogue : MonoBehaviour
                 case "Auntie":
                     spawn.transform.position = new Vector2(29,13);
                     if (family_gathered == 3) {
+                        quest_complete.Play();
                         dialogue_lines = new string[2] {"Family gathered", "Thank you"};
                     } else {
                         dialogue_lines = new string[1] { "Hello please go find my family thank you"};
@@ -150,6 +153,7 @@ public class Dialogue : MonoBehaviour
         dialogue_box.SetActive(true);
         zone = other.tag;
         NPCname.text = zone;
+        Index = 0;
        
     }
     private void OnTriggerExit2D(Collider2D other) {
@@ -176,24 +180,13 @@ public class Dialogue : MonoBehaviour
     {
         if(Index <= dialogue_lines.Length - 1)
         {
-            Index = 0;
             DialogueText.text = "";
             StartCoroutine(WriteSentence());
 
-        } /*else {
-                if (zone == "Family 1" && zone == "Family 2" && zone == "Family 3")
-                {
-                    
-                    DialogueText.text = "";
-                    StartCoroutine(WriteSentence());
-                }
-                
-                
-            }*/
-            
-         
+        }    
         if (Index >= dialogue_lines.Length) {
             Index = 0;
+            dialogue_box.SetActive(false);
             switch (zone) {
                 case "Family 1":
                     family1.SetActive(false);

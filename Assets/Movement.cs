@@ -14,6 +14,8 @@ public class Movement : MonoBehaviour
 
     public GameObject spawn;
 
+    public AudioSource walking;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,12 +43,21 @@ public class Movement : MonoBehaviour
             flip = transform.localScale;
             flip.x = -1;
             transform.localScale = flip;
+            if(!walking.isPlaying) {
+                walking.Play();
+            }
+            
         }
-        if (rb.velocity.x < 0)
+         else if (rb.velocity.x < 0)
         {
             flip = transform.localScale;
             flip.x = 1;
             transform.localScale = flip;
+            if(!walking.isPlaying) {
+                walking.Play();
+            }
+        } else {
+            walking.Pause();
         }
 
     }
