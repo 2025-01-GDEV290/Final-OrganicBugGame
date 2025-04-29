@@ -7,7 +7,7 @@ public class Dialogue : MonoBehaviour
 {
 
     public TextMeshProUGUI DialogueText;
-    private int Index = 0;
+    public int Index = 0;
     public float DialogueSpeed;
     public TMP_Text dialogue;
     public TMP_Text NPCname;
@@ -176,19 +176,20 @@ public class Dialogue : MonoBehaviour
     {
         if(Index <= dialogue_lines.Length - 1)
         {
+            Index = 0;
             DialogueText.text = "";
             StartCoroutine(WriteSentence());
 
-        } else {
-                if (zone != "Family 1" && zone != "Family 2" && zone != "Family 3")
+        } /*else {
+                if (zone == "Family 1" && zone == "Family 2" && zone == "Family 3")
                 {
-                    Index = 0;
+                    
                     DialogueText.text = "";
                     StartCoroutine(WriteSentence());
                 }
                 
                 
-            }
+            }*/
             
          
         if (Index >= dialogue_lines.Length) {
@@ -200,7 +201,7 @@ public class Dialogue : MonoBehaviour
                     break;
 
                 case "Family 2":
-                    family2.SetActive(false);
+                   family2.SetActive(false);
                     family_gathered++;
                     break;
                 
