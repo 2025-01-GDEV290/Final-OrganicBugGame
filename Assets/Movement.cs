@@ -25,17 +25,18 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        if (!enabled) return; // 🔒 Stop player input when movement is disabled
+
         movement.x = Input.GetAxisRaw("Horizontal");
 
-        // Basic jump check � jump only when vertical velocity is near zero
         if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) < jumplock)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
-        if(rb.position.y < -10)
+        if (rb.position.y < -10)
         {
-            rb.position = spawn.transform.position; //new Vector2(-6, 11);
+            rb.position = spawn.transform.position;
         }
 
         if (rb.velocity.x > 0)
@@ -43,27 +44,33 @@ public class Movement : MonoBehaviour
             flip = transform.localScale;
             flip.x = -1;
             transform.localScale = flip;
-            if(!walking.isPlaying) {
+
+            if (!walking.isPlaying)
+            {
                 walking.Play();
             }
-            
         }
-         else if (rb.velocity.x < 0)
+        else if (rb.velocity.x < 0)
         {
             flip = transform.localScale;
             flip.x = 1;
             transform.localScale = flip;
-            if(!walking.isPlaying) {
+
+            if (!walking.isPlaying)
+            {
                 walking.Play();
             }
-        } else {
+        }
+        else
+        {
             walking.Pause();
         }
-
     }
 
     void FixedUpdate()
     {
+        if (!enabled) return; // 🔒 Prevent physics-based movement when disabled
+
         rb.velocity = new Vector2(movement.x * moveSpeed, rb.velocity.y);
     }
 }
