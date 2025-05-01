@@ -17,6 +17,10 @@ public class Dialogue : MonoBehaviour
     public GameObject family1;
     public GameObject family2;
     public GameObject family3;
+    public GameObject family1_auntie;
+    public GameObject family2_auntie;
+    public GameObject family3_auntie;
+    public GameObject bucket;
     public AudioSource quest_complete;
 
     public string item = "none";
@@ -191,16 +195,23 @@ public class Dialogue : MonoBehaviour
                 case "Family 1":
                     family1.SetActive(false);
                     family_gathered++;
+                    family1_auntie.SetActive(true);
                     break;
 
                 case "Family 2":
                    family2.SetActive(false);
                     family_gathered++;
+                    family2_auntie.SetActive(true);
                     break;
                 
                 case "Family 3":
                     family3.SetActive(false);
                     family_gathered++;
+                    family3_auntie.SetActive(true);
+                    break;
+
+                case "Bucket":
+                    bucket.SetActive(false);
                     break;
                 
                 default:
