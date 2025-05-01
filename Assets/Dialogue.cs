@@ -32,16 +32,15 @@ public class Dialogue : MonoBehaviour
     private InventoryUI inventory;
 
     // 🔧 Added for movement freezing
-    public GameObject player; // Assign in Inspector
     private Movement playerMovement;
+    private Rigidbody2D rb;
 
     void Start()
     {
-        inventory = FindObjectOfType<InventoryUI>();
-        if (player != null)
-        {
-            playerMovement = player.GetComponent<Movement>(); // Replace with your movement script name if needed
-        }
+        playerMovement = this.GetComponent<Movement>(); // Replace with your movement script name if needed
+        rb = this.GetComponent<Rigidbody2D>();
+
+
     }
 
     void Update()
@@ -175,6 +174,7 @@ public class Dialogue : MonoBehaviour
             // 🔓 Re-enable player movement
             if (playerMovement != null)
             {
+                rb.velocity = new Vector2(0,0);
                 playerMovement.enabled = true;
             }
         }
@@ -184,6 +184,7 @@ public class Dialogue : MonoBehaviour
             // 🔒 Disable player movement
             if (playerMovement != null)
             {
+                rb.velocity = new Vector2(0, 0);
                 playerMovement.enabled = false;
             }
         }

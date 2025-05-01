@@ -5787,6 +5787,7 @@ MonoBehaviour:
   cow_complete: 0
   paused: 0
   writing: 0
+  player: {fileID: 1137651793}
 --- !u!70 &1137651800
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
