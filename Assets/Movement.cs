@@ -8,9 +8,10 @@ public class Movement : MonoBehaviour
     public float jumpForce = 6f;
     public float jumplock = 0.01f;
     private Vector3 flip;
-
+    private Animator animator;
     private Rigidbody2D rb;
     private Vector2 movement;
+    private SpriteRenderer sr;
 
     public GameObject spawn;
 
@@ -19,19 +20,36 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
         rb.freezeRotation = true;
         rb.position = spawn.transform.position;
     }
 
     void Update()
     {
-        if (!enabled) return; // 🔒 Stop player input when movement is disabled
+        if (!enabled) return;
 
         movement.x = Input.GetAxisRaw("Horizontal");
+
+        if (movement.x == 0) 
+        {
+            animator.SetInteger("movement", 0);
+        }
+        else
+        {
+            animator.SetInteger("movement", 1);
+        }
+
+        if (movement.x > 0)
+            sr.flipX = true;  // Facing right
+        else if (movement.x < 0)
+            sr.flipX = false;
 
         if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) < jumplock)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            animator.SetInteger("movement", 2);
         }
 
         if (rb.position.y < -10)
@@ -69,7 +87,7 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!enabled) return; // 🔒 Prevent physics-based movement when disabled
+        if (!enabled) return;
 
         rb.velocity = new Vector2(movement.x * moveSpeed, rb.velocity.y);
     }

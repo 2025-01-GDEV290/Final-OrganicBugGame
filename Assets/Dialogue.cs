@@ -31,7 +31,6 @@ public class Dialogue : MonoBehaviour
 
     private InventoryUI inventory;
 
-    // 🔧 Added for movement freezing
     private Movement playerMovement;
     private Rigidbody2D rb;
 
@@ -171,7 +170,6 @@ public class Dialogue : MonoBehaviour
         if (paused)
         {
             paused = false;
-            // 🔓 Re-enable player movement
             if (playerMovement != null)
             {
                 rb.velocity = new Vector2(0,0);
@@ -181,7 +179,6 @@ public class Dialogue : MonoBehaviour
         else
         {
             paused = true;
-            // 🔒 Disable player movement
             if (playerMovement != null)
             {
                 rb.velocity = new Vector2(0, 0);
