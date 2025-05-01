@@ -62,6 +62,7 @@ public class Dialogue : MonoBehaviour
                         {
                             cow_complete = true;
                             item = "milk";
+                            inventory.ShowMilkBucket();
                         }
                         else
                         {
@@ -71,8 +72,7 @@ public class Dialogue : MonoBehaviour
                     if (cow_complete)
                     {
                         dialogue_lines = new string[1] { "Moo! (You have milked the cow)" };
-                        item = "milk";
-                        inventory.ShowMilkBucket();
+                        
                     } else {
                         dialogue_lines = new string[1] { "(You can't milk the cow without a bucket)"};
                     }
