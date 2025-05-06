@@ -1,11 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
-
     public TextMeshProUGUI DialogueText;
     public int Index = 0;
     public float DialogueSpeed;
@@ -35,27 +34,31 @@ public class Dialogue : MonoBehaviour
     public bool paused = false;
     public bool writing = false;
 
-
-    // Start is called before the first frame update
-
     private InventoryUI inventory;
+
+    private Movement playerMovement;
+    private Rigidbody2D rb;
+
     void Start()
     {
-        inventory = FindObjectOfType<InventoryUI>();
+        playerMovement = this.GetComponent<Movement>(); // Replace with your movement script name if needed
+        rb = this.GetComponent<Rigidbody2D>();
+
+
     }
 
-    // Update is called once per frame
     void Update()
-    {   //Dialogue on interacting with zone
+    {
         if (Input.GetKeyDown("e") && !writing)
         {
-            switch (zone){
+            switch (zone)
+            {
                 case "Bucket":
                     item = "bucket";
-                    dialogue_lines = new string[1] {"(You have picked up the bucket)"};
+                    dialogue_lines = new string[1] { "(You have picked up the bucket)" };
                     inventory.ShowEmptyBucket();
                     break;
-                
+
                 case "Cow":
                     if (!cow_complete)
                     {
@@ -76,12 +79,16 @@ public class Dialogue : MonoBehaviour
                         
                     } else {
                         dialogue_lines = new string[1] { "(You can't milk the cow without a bucket)"};
+                        item = "milk";
+                        inventory.ShowMilkBucket();
                     }
-                    
+                    else
+                    {
+                        dialogue_lines = new string[1] { "(You can't milk the cow without a bucket)" };
+                    }
                     break;
 
                 case "Milkman":
-
                     if (!milkman_complete)
                     {
                         if (item == "milk")
@@ -91,67 +98,67 @@ public class Dialogue : MonoBehaviour
                         }
                         else
                         {
-                            dialogue_lines = new string[2] {"I am the milk man", "bring me milk, bug"};
+                            dialogue_lines = new string[2] { "I am the milk man", "bring me milk, bug" };
                         }
                     }
                     if (milkman_complete)
                     {
-                        dialogue_lines = new string[3] {"Thank you", "I now have milk.", "You may proceed." };
+                        dialogue_lines = new string[3] { "Thank you", "I now have milk.", "You may proceed." };
                         item = "none";
                         inventory.ClearInventory();
                         wall.SetActive(false);
-                    }                 
-                break;
+                    }
+                    break;
 
                 case "Auntie":
-                    spawn.transform.position = new Vector2(29,13);
-                    if (family_gathered == 3) {
+                    spawn.transform.position = new Vector2(29, 13);
+                    if (family_gathered == 3)
+                    {
                         quest_complete.Play();
-                        dialogue_lines = new string[2] {"Family gathered", "Thank you"};
-                    } else {
-                        dialogue_lines = new string[1] { "Hello please go find my family thank you"};
+                        dialogue_lines = new string[2] { "Family gathered", "Thank you" };
+                    }
+                    else
+                    {
+                        dialogue_lines = new string[1] { "Hello please go find my family thank you" };
                     }
                     break;
 
                 case "Family 1":
-                    dialogue_lines = new string[1] { "Hello hi yes I will go to auntie"};
+                    dialogue_lines = new string[1] { "Hello hi yes I will go to auntie" };
                     break;
-                
+
                 case "Family 2":
-                    dialogue_lines = new string[1] { "Hello hi yes I will also go to auntie"};
+                    dialogue_lines = new string[1] { "Hello hi yes I will also go to auntie" };
                     break;
-                
+
                 case "Family 3":
-                    dialogue_lines = new string[1] { "Hello hi yes I will go to auntie as well"};
+                    dialogue_lines = new string[1] { "Hello hi yes I will go to auntie as well" };
                     break;
-                
+
                 default:
                     Debug.Log("Nothing to interact with");
                     break;
             }
+
             if (!paused)
             {
                 PauseGame();
             }
-            if(paused)
+
+            if (paused)
             {
-                if(dialogue_num == dialogue_lines.Length)
+                if (dialogue_num == dialogue_lines.Length)
                 {
                     PauseGame();
-                    //dialogue_num = 0;
-                } else {
+                }
+                else
+                {
                     NextSentence();
-                    //dialogue.text = dialogue_lines[dialogue_num];
-                    //if (dialogue_num < dialogue_lines.Length)
-                    //{
-                    //    dialogue_num++;
-                    //}   
-                }   
+                }
             }
         }
     }
 
-    //Dialogue on approaching Dialogue zone
     private void OnTriggerEnter2D(Collider2D other)
     {
         DialogueText.text = "Press E";
@@ -159,9 +166,10 @@ public class Dialogue : MonoBehaviour
         zone = other.tag;
         NPCname.text = zone;
         Index = 0;
-       
     }
-    private void OnTriggerExit2D(Collider2D other) {
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
         dialogue_box.SetActive(false);
         zone = "none";
     }
@@ -170,30 +178,42 @@ public class Dialogue : MonoBehaviour
     {
         if (paused)
         {
-            //Time.timeScale = 1;
             paused = false;
-            //dialogue_box.SetActive(false);
-            //zone = "none";
-        } else
+            if (playerMovement != null)
+            {
+                rb.velocity = new Vector2(0,0);
+                playerMovement.enabled = true;
+            }
+        }
+        else
         {
-            //Time.timeScale = 0;
             paused = true;
+            if (playerMovement != null)
+            {
+                rb.velocity = new Vector2(0, 0);
+                playerMovement.enabled = false;
+            }
         }
     }
 
     void NextSentence()
     {
-        if(Index <= dialogue_lines.Length - 1)
+        if (Index <= dialogue_lines.Length - 1)
         {
             DialogueText.text = "";
             StartCoroutine(WriteSentence());
             dialogue_sfx.Play();
+        }
 
-        }    
-        if (Index >= dialogue_lines.Length) {
+        if (Index >= dialogue_lines.Length)
+        {
             Index = 0;
             dialogue_box.SetActive(false);
-            switch (zone) {
+
+            PauseGame();
+
+            switch (zone)
+            {
                 case "Family 1":
                     family1.SetActive(false);
                     family_gathered++;
@@ -201,11 +221,11 @@ public class Dialogue : MonoBehaviour
                     break;
 
                 case "Family 2":
-                   family2.SetActive(false);
+                    family2.SetActive(false);
                     family_gathered++;
                     family2_auntie.SetActive(true);
                     break;
-                
+
                 case "Family 3":
                     family3.SetActive(false);
                     family_gathered++;
@@ -215,9 +235,6 @@ public class Dialogue : MonoBehaviour
                 case "Bucket":
                     bucket.SetActive(false);
                     break;
-                
-                default:
-                    break;
             }
         }
     }
@@ -225,7 +242,7 @@ public class Dialogue : MonoBehaviour
     IEnumerator WriteSentence()
     {
         writing = true;
-        foreach(char Character in dialogue_lines[Index].ToCharArray())
+        foreach (char Character in dialogue_lines[Index].ToCharArray())
         {
             DialogueText.text += Character;
             yield return new WaitForSeconds(DialogueSpeed);
