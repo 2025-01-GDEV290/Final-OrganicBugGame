@@ -35,15 +35,9 @@ public class Dialogue : MonoBehaviour
     public bool paused = false;
     public bool writing = false;
 
-
-
-    private InventoryUI inventory;
-    void Start()
-    {
-        inventory = FindObjectOfType<InventoryUI>();
+   
 
     public InventoryUI inventory;
-
     private Movement playerMovement;
     private Rigidbody2D rb;
 
