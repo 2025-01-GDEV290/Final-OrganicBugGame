@@ -36,12 +36,24 @@ public class Dialogue : MonoBehaviour
     public bool writing = false;
 
 
-    // Start is called before the first frame update
 
     private InventoryUI inventory;
     void Start()
     {
         inventory = FindObjectOfType<InventoryUI>();
+
+    public InventoryUI inventory;
+
+    private Movement playerMovement;
+    private Rigidbody2D rb;
+
+    void Start()
+    {
+        playerMovement = this.GetComponent<Movement>();
+        inventory = FindObjectOfType<InventoryUI>();
+        rb = this.GetComponent<Rigidbody2D>();
+
+
     }
 
     // Update is called once per frame
