@@ -22,6 +22,7 @@ public class Dialogue : MonoBehaviour
     public GameObject family3_auntie;
     public GameObject bucket;
     public AudioSource quest_complete;
+    public AudioSource dialogue_sfx;
 
     public string item = "none";
     public string zone = "none";
@@ -186,6 +187,7 @@ public class Dialogue : MonoBehaviour
         {
             DialogueText.text = "";
             StartCoroutine(WriteSentence());
+            dialogue_sfx.Play();
 
         }    
         if (Index >= dialogue_lines.Length) {
