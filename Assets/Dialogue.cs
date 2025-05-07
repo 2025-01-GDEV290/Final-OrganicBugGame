@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -12,7 +12,6 @@ public class Dialogue : MonoBehaviour
     public TMP_Text NPCname;
     public GameObject dialogue_box;
     public GameObject wall;
-    public GameObject bucket;
     public GameObject spawn;
     public GameObject family1;
     public GameObject family2;
@@ -177,7 +176,7 @@ public class Dialogue : MonoBehaviour
             paused = false;
             if (playerMovement != null)
             {
-                rb.velocity = new Vector2(0, 0);
+                rb.velocity = new Vector2(0,0);
                 playerMovement.enabled = true;
             }
         }
@@ -198,12 +197,13 @@ public class Dialogue : MonoBehaviour
         {
             DialogueText.text = "";
             StartCoroutine(WriteSentence());
-
         }
+
         if (Index >= dialogue_lines.Length)
         {
             Index = 0;
             dialogue_box.SetActive(false);
+
             switch (zone)
             {
                 case "Family 1":
@@ -223,16 +223,12 @@ public class Dialogue : MonoBehaviour
                     family_gathered++;
                     family3_auntie.SetActive(true);
                     break;
-
-                case "Bucket":
-                    bucket.SetActive(false);
-                    break;
-
-                default:
-                    break;
             }
+
+            PauseGame();
         }
     }
+
 
     IEnumerator WriteSentence()
     {
