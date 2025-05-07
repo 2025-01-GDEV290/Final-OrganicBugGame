@@ -3743,12 +3743,7 @@ MonoBehaviour:
   family1: {fileID: 1358925982}
   family2: {fileID: 1941358652}
   family3: {fileID: 277724987}
-  family1_auntie: {fileID: 1822254224}
-  family2_auntie: {fileID: 1287344647}
-  family3_auntie: {fileID: 1754218752}
-  bucket: {fileID: 1178859863}
   quest_complete: {fileID: 1137651803}
-  dialogue_sfx: {fileID: 1137651805}
   item: none
   zone: none
   dialogue_lines: []
@@ -4212,7 +4207,7 @@ Transform:
   m_GameObject: {fileID: 1175402677}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.147, y: 0.016, z: 14.29672}
+  m_LocalPosition: {x: 0.147, y: 0.016, z: 13.34}
   m_LocalScale: {x: 0.15988335, y: 0.5183146, z: 0.99127674}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4374,7 +4369,7 @@ Transform:
   m_GameObject: {fileID: 1198526479}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.305, y: -0.024, z: 14.29672}
+  m_LocalPosition: {x: -0.305, y: -0.024, z: 13.34}
   m_LocalScale: {x: 0.15988335, y: 0.5183146, z: 0.99127674}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4902,7 +4897,7 @@ Transform:
   m_GameObject: {fileID: 1416570579}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3178, y: 0.044, z: 14.29672}
+  m_LocalPosition: {x: 0.3178, y: 0.044, z: 13.34}
   m_LocalScale: {x: 0.15988335, y: 0.5183146, z: 0.99127674}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5084,7 +5079,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.1458335
+  orthographic size: 5.625
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
