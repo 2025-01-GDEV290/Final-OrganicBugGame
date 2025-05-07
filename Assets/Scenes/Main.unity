@@ -5788,6 +5788,7 @@ MonoBehaviour:
   cow_complete: 0
   paused: 0
   writing: 0
+  inventory: {fileID: 2015473318}
 --- !u!70 &1137651800
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

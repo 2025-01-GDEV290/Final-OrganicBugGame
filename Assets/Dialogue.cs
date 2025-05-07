@@ -29,14 +29,15 @@ public class Dialogue : MonoBehaviour
     public bool paused = false;
     public bool writing = false;
 
-    private InventoryUI inventory;
+    public InventoryUI inventory;
 
     private Movement playerMovement;
     private Rigidbody2D rb;
 
     void Start()
     {
-        playerMovement = this.GetComponent<Movement>(); // Replace with your movement script name if needed
+        playerMovement = this.GetComponent<Movement>();
+        inventory = FindObjectOfType<InventoryUI>();
         rb = this.GetComponent<Rigidbody2D>();
 
 
