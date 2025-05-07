@@ -12,10 +12,14 @@ public class Dialogue : MonoBehaviour
     public TMP_Text NPCname;
     public GameObject dialogue_box;
     public GameObject wall;
+    public GameObject bucket;
     public GameObject spawn;
     public GameObject family1;
     public GameObject family2;
     public GameObject family3;
+    public GameObject family1_auntie;
+    public GameObject family2_auntie;
+    public GameObject family3_auntie;
     public AudioSource quest_complete;
 
     public string item = "none";
@@ -194,30 +198,37 @@ public class Dialogue : MonoBehaviour
         {
             DialogueText.text = "";
             StartCoroutine(WriteSentence());
-        }
 
+        }
         if (Index >= dialogue_lines.Length)
         {
             Index = 0;
             dialogue_box.SetActive(false);
-
-            PauseGame();
-
             switch (zone)
             {
                 case "Family 1":
                     family1.SetActive(false);
                     family_gathered++;
+                    family1_auntie.SetActive(true);
                     break;
 
                 case "Family 2":
                     family2.SetActive(false);
                     family_gathered++;
+                    family2_auntie.SetActive(true);
                     break;
 
                 case "Family 3":
                     family3.SetActive(false);
                     family_gathered++;
+                    family3_auntie.SetActive(true);
+                    break;
+
+                case "Bucket":
+                    bucket.SetActive(false);
+                    break;
+
+                default:
                     break;
             }
         }
