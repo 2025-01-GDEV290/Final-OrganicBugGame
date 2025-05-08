@@ -176,7 +176,7 @@ public class Dialogue : MonoBehaviour
             paused = false;
             if (playerMovement != null)
             {
-                rb.velocity = new Vector2(0,0);
+                rb.velocity = new Vector2(0, 0);
                 playerMovement.enabled = true;
             }
         }
@@ -242,3 +242,4 @@ public class Dialogue : MonoBehaviour
         writing = false;
     }
 }
+
