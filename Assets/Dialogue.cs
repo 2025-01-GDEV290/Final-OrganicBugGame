@@ -93,12 +93,12 @@ public class Dialogue : MonoBehaviour
                         }
                         else
                         {
-                            dialogue_lines = new string[2] { "I am the milk man", "bring me milk, bug" };
+                            dialogue_lines = new string[2] { "Oh! I'm so glad you're here.", "the cow needs to be milked. Can you help?" };
                         }
                     }
                     if (milkman_complete)
                     {
-                        dialogue_lines = new string[3] { "Thank you", "I now have milk.", "You may proceed." };
+                        dialogue_lines = new string[3] { "Thank you!", "By the way, Auntie needs some help.", "Please go help her." };
                         item = "none";
                         inventory.ClearInventory();
                         wall.SetActive(false);
@@ -110,24 +110,24 @@ public class Dialogue : MonoBehaviour
                     if (family_gathered == 3)
                     {
                         quest_complete.Play();
-                        dialogue_lines = new string[2] { "Family gathered", "Thank you" };
+                        dialogue_lines = new string[2] { "They're all here!", "Thank you!" };
                     }
                     else
                     {
-                        dialogue_lines = new string[1] { "Hello please go find my family thank you" };
+                        dialogue_lines = new string[1] { "Hello please go find my family. It's picture time!" };
                     }
                     break;
 
                 case "Family 1":
-                    dialogue_lines = new string[1] { "Hello hi yes I will go to auntie" };
+                    dialogue_lines = new string[1] { "Hi! Auntie needs me? Ok." };
                     break;
 
                 case "Family 2":
-                    dialogue_lines = new string[1] { "Hello hi yes I will also go to auntie" };
+                    dialogue_lines = new string[1] { "Hi! I'll head over to Auntie!" };
                     break;
 
                 case "Family 3":
-                    dialogue_lines = new string[1] { "Hello hi yes I will go to auntie as well" };
+                    dialogue_lines = new string[1] { "Auntie? I'm on my way!" };
                     break;
 
                 default:
